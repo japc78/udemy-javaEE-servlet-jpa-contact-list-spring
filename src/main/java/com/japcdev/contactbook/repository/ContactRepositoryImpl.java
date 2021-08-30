@@ -12,34 +12,58 @@ import com.japcdev.contactbook.model.Contact;
 public class ContactRepositoryImpl implements ContactRepository {
 	@Autowired
 	JdbcTemplate template;
-	
+
 	@Override
 	public void addContact(Contact contact) {
-		// TODO Auto-generated method stub
+		String sql = "INSERT INTO contacts (name, email, phoneNumber) VALUE(?,?,?)";
+		template.update(sql, 
+				contact.getName(), 
+				contact.getEmail(), 
+				contact.getPhoneNumber());		
 	}
 
 	@Override
 	public Contact getContactEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql="SELECT * FROM contacts WHERE email = ?";
+		List<Contact> contacts= template.query(sql, 
+			  (resultSet, row)-> new Contact(
+					  resultSet.getInt("idContacto"),
+					  resultSet.getString("nombre"),
+					  resultSet.getString("email"),
+					  resultSet.getInt("telefono")),
+			  email);
+		return contacts.size() > 0 ? contacts.get(0) : null;
 	}
 
 	@Override
 	public Contact getContactId(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql="SELECT * FROM contacts WHERE id = ?";
+		List<Contact> contacts= template.query(sql, 
+			  (resultSet, row)-> new Contact(
+					  resultSet.getInt("idContacto"),
+					  resultSet.getString("nombre"),
+					  resultSet.getString("email"),
+					  resultSet.getInt("telefono")),
+			  id);
+		return contacts.size() >0 ? contacts.get(0) : null;
 	}
 
 	@Override
 	public void deleteContact(int id) {
-		// TODO Auto-generated method stub
-
+		String sql = "DELETE FROM contacts WHERE id = ?";
+		template.update(sql, id);
 	}
 
 	@Override
 	public List<Contact> getContactList() {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "SELECT * FROM contacts";
+
+		return template.query(sql, (resultSet, row)->new Contact(
+				resultSet.getInt("id"),
+				resultSet.getString("name"),
+				resultSet.getString("email"),
+				resultSet.getInt("phoneNumber")
+				));		 
 	}
 
 }
