@@ -18,6 +18,13 @@ public class Contact {
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 	}
+	
+	public Contact(String name, String email, int phoneNumber) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+	}
 
 
 	public int getId() {
