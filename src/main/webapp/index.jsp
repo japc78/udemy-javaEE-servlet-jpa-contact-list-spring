@@ -17,9 +17,9 @@
 <body>
 <div class="container">
 	<br/><br/>
-	<h1><a href="sign-up">Add contact</a></h1>
+	<h1><a href="signUp">Add contact</a></h1>
 	<br/><br/>
-	<h1><a href="getContactList">Contact List</a></h1>	
+	<h1><a href="getList">Contact List</a></h1>	
 </div>
 </body>
 </html>
