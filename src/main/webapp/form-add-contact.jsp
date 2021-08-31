@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="f"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,25 +19,25 @@
 <div class="container">
 	<h1>Contact finder</h1>
 	<br/>
-	<form action="add" method="post" class="form-horizontal" >
+	<f:form action="add" method="post" class="form-horizontal" modelAttribute="contact">
 		<div class="form-group">
 			<label class="control-label col-sm-2">Name:</label>
-			<input type="text" name="name" class="form-control" style="width:30%"/>
+			<f:input path="name" class="form-control" style="width:30%"/>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-sm-2">Email:</label>
-			<input type="text" name="email" class="form-control" style="width:30%"/>
+			<f:input path="email" class="form-control" style="width:30%"/>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-sm-2">Phone Number:</label>
-			<input type="text" name="phoneNumber" class="form-control" style="width:30%"/>
+			<f:input path="text" name="phoneNumber" class="form-control" style="width:30%"/>
 		</div>
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
 				<button type="submit" class="btn btn-default" style="width:30%">Save</button>
 			</div>
 		</div>
-	</form>
+	</f:form>
 </div>
 </body>
 </html>

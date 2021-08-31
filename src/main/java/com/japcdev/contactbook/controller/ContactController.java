@@ -4,7 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -16,14 +18,15 @@ public class ContactController {
 	@Autowired
 	ContactService contactService;
 	
+	@GetMapping("signUP")
+	public String preSignUp(Model model) {
+		Contact contact = new Contact();
+		model.addAttribute("contact", contact);
+		return "form-add-contact";
+	}
+	
 	@PostMapping("add")
-	public String newContact( 
-			@RequestParam("name") String name,
-			@RequestParam("email") String email,
-			@RequestParam("phoneNumber") int phoneNumber) {
-		
-		Contact contact = new Contact(name, email, phoneNumber);
-		
+	public String newContact(@ModelAttribute("contact")Contact contact) {
 		if (!contactService.newContact(contact)) {
 			return "repeat";
 		}
